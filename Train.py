@@ -12,7 +12,7 @@ class ModeloML:
         self.y = None
         self.modelo = None
         
-    def preprocess(self,coluna_alvo,norm_col):
+    def preprocess(self,coluna_alvo,norm_col,norm_is_true=False):
         #Fazendo a separação das variaveis target
         self.x=self.dados.drop(columns=coluna_alvo,axis=1)
         self.y = self.dados[coluna_alvo]
@@ -21,13 +21,15 @@ class ModeloML:
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.x,self.y,train_size=0.2,random_state=100)
 
         #Normalização dos dados
-        scaler = StandardScaler()
-        self.x_train[norm_col] = scaler.fit_transform(self.x_train[norm_col])
-        self.x_test[norm_col] = scaler.fit_transform(self.x_test[norm_col])
-        
+        if norm_is_true == True:
+            scaler = StandardScaler()
+            self.x_train[norm_col] = scaler.fit_transform(self.x_train[norm_col])
+            self.x_test[norm_col] = scaler.fit_transform(self.x_test[norm_col])
+        else:
+            pass
         #treinando o modelo
     def treinar_modelo(self):
-        self.modelo = LogisticRegression(max_iter=500)
+        self.modelo = LogisticRegression(max_iter=1000)
         self.modelo.fit(self.x_train,self.y_train)
     
         #fazendo testes
@@ -43,9 +45,16 @@ class ModeloML:
         pred_prob = self.modelo.predict_proba(novos_dados)
         return pred,pred_prob[0][1]
     
-    
-modelo = ModeloML(path="C:/Users/anali/Downloads/diabetes_binary_5050split_health_indicators_BRFSS2021.csv")
-modelo.preprocess(coluna_alvo='Diabetes_binary',norm_col=['BMI'])
-modelo.treinar_modelo()
-print(modelo.testar_modelo())
-print(modelo.predict(novos_dados=pd.DataFrame(np.array([0,1.0,1,31.0,1.0,0.0,0.0,0,0,0,0,1,0.0,3.0,0.0,23.0,0.0,1,10,4.0,3.0]).reshape(1,-1),columns=['HighBP','HighChol','CholCheck','BMI','Smoker','Stroke','HeartDiseaseorAttack','PhysActivity','Fruits','Veggies','HvyAlcoholConsump','AnyHealthcare','NoDocbcCost','GenHlth','MentHlth','PhysHlth','DiffWalk','Sex','Age','Education','Income'])))
+def tratar_dados_novos(dados):
+    array = np.array(dados).reshape(1,-1)
+    df = pd.DataFrame(array,columns=['HighBP','HighChol','CholCheck','BMI','Smoker','Stroke','HeartDiseaseorAttack','PhysActivity','Fruits','Veggies','HvyAlcoholConsump','AnyHealthcare','NoDocbcCost','GenHlth','MentHlth','PhysHlth','DiffWalk','Sex','Age','Education','Income'])
+    return df
+
+def run(novos_dados):
+    modelo = ModeloML(path="C:/Users/anali/Downloads/diabetes_binary_5050split_health_indicators_BRFSS2021.csv")
+    modelo.preprocess(coluna_alvo='Diabetes_binary',norm_col=['BMI'],norm_is_true=False)
+    modelo.treinar_modelo()
+    print(modelo.testar_modelo())
+    print(modelo.predict(novos_dados=tratar_dados_novos(novos_dados)))
+
+run(novos_dados=[0,0.0,0,35.0,0.0,0.0,0.0,0,0,0,0,0,0.0,1.0,0.0,0.0,0.0,1,3,6.0,11.0])
