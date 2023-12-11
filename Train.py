@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,precision_score,confusion_matrix
+import numpy as np
 
 class ModeloML:
     def __init__(self,path):
@@ -38,12 +39,13 @@ class ModeloML:
 
         #função para previsões
     def predict(self,novos_dados):
-        pred = self.modelo.predict(novos_dados)
-        return pred
+        pred = self.modelo.predict(X=novos_dados)
+        pred_prob = self.modelo.predict_proba(novos_dados)
+        return pred,pred_prob[0][1]
     
     
 modelo = ModeloML(path="C:/Users/anali/Downloads/diabetes_binary_5050split_health_indicators_BRFSS2021.csv")
 modelo.preprocess(coluna_alvo='Diabetes_binary',norm_col=['BMI'])
 modelo.treinar_modelo()
 print(modelo.testar_modelo())
-
+print(modelo.predict(novos_dados=np.array([0,1.0,1,31.0,1.0,0.0,0.0,0,0,0,0,1,0.0,3.0,0.0,23.0,0.0,1,10,4.0,3.0]).reshape(1,-1)))
