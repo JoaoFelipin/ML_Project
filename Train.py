@@ -48,4 +48,4 @@ modelo = ModeloML(path="C:/Users/anali/Downloads/diabetes_binary_5050split_healt
 modelo.preprocess(coluna_alvo='Diabetes_binary',norm_col=['BMI'])
 modelo.treinar_modelo()
 print(modelo.testar_modelo())
-print(modelo.predict(novos_dados=np.array([0,1.0,1,31.0,1.0,0.0,0.0,0,0,0,0,1,0.0,3.0,0.0,23.0,0.0,1,10,4.0,3.0]).reshape(1,-1)))
+print(modelo.predict(novos_dados=pd.DataFrame(np.array([0,1.0,1,31.0,1.0,0.0,0.0,0,0,0,0,1,0.0,3.0,0.0,23.0,0.0,1,10,4.0,3.0]).reshape(1,-1),columns=['HighBP','HighChol','CholCheck','BMI','Smoker','Stroke','HeartDiseaseorAttack','PhysActivity','Fruits','Veggies','HvyAlcoholConsump','AnyHealthcare','NoDocbcCost','GenHlth','MentHlth','PhysHlth','DiffWalk','Sex','Age','Education','Income'])))
