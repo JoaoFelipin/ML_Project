@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,precision_score,confusion_matrix
 import numpy as np
+import pickle 
 
 class ModeloML:
     def __init__(self,path):
@@ -56,5 +57,10 @@ def run(novos_dados):
     modelo.treinar_modelo()
     print(modelo.testar_modelo())
     print(modelo.predict(novos_dados=tratar_dados_novos(novos_dados)))
+    serialize_object(model=modelo)
+
+def serialize_object(model):
+    with open("trained_classifier.pkl", "wb") as file:
+        pickle.dump(model, file)
 
 run(novos_dados=[0,0.0,0,35.0,0.0,0.0,0.0,0,0,0,0,0,0.0,1.0,0.0,0.0,0.0,1,3,6.0,11.0])
