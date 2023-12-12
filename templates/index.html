@@ -6,9 +6,27 @@
 <body>
     <h1>Insira seus dados</h1>
     <form action="/predict" method="post">
-        <input type="text" name="feature1" placeholder="Característica 1" required="required">
-        <input type="text" name="feature2" placeholder="Característica 2" required="required">
-    
+        <input type="text" name="feature1" placeholder="High BP" required="required">
+        <input type="text" name="feature2" placeholder="HighChol" required="required">
+        <input type="text" name="feature3" placeholder="CholCheck" required="required">
+        <input type="text" name="feature4" placeholder="BMI" required="required">
+        <input type="text" name="feature5" placeholder="Smoker" required="required">
+        <input type="text" name="feature6" placeholder="Stroke" required="required">
+        <input type="text" name="feature7" placeholder="Heart Disease" required="required">
+        <input type="text" name="feature8" placeholder="Physical Activity" required="required">
+        <input type="text" name="feature9" placeholder="Fruits" required="required">
+        <input type="text" name="feature10" placeholder="Veggies" required="required">
+        <input type="text" name="feature11" placeholder="HvyAlcohol" required="required">
+        <input type="text" name="feature12" placeholder="HealthCare" required="required">
+        <input type="text" name="feature13" placeholder="NoDocBcCost" required="required">
+        <input type="text" name="feature14" placeholder="GenHealth" required="required">
+        <input type="text" name="feature15" placeholder="MentHealth" required="required">
+        <input type="text" name="feature16" placeholder="PhysHealth" required="required">
+        <input type="text" name="feature17" placeholder="DiffWalk" required="required">
+        <input type="text" name="feature18" placeholder="sex" required="required">
+        <input type="text" name="feature19" placeholder="Age" required="required">
+        <input type="text" name="feature20" placeholder="Education" required="required">
+        <input type="text" name="feature21" placeholder="Income" required="required">
         <button type="submit">Prever</button>
     </form>
     {% if prediction_text %}
