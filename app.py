@@ -23,8 +23,13 @@ def predict():
     
     # Faça a previsão usando o modelo
     prediction = model.predict(final_features_transform)
+    if prediction[0] == 1:
+        diabetes='Diabético'
+    else:
+        diabetes='Não Diabético'
     
-    return render_template('index.html', prediction_text=f'A previsão do modelo é {prediction[1]*100}% de ser {prediction[0]}')
+    
+    return render_template('index.html', prediction_text=f'A previsão do modelo é {prediction[1]*100}% de ser {diabetes}')
 
 if __name__ == "__main__":
     app.run(debug=True)
