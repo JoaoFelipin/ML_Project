@@ -44,7 +44,7 @@ class ModeloML:
     def predict(self,novos_dados):
         pred = self.modelo.predict(X=novos_dados)
         pred_prob = self.modelo.predict_proba(novos_dados)
-        return pred,pred_prob[0][1]
+        return pred,round(pred_prob[0][1],3)
     
 def tratar_dados_novos(dados):
     array = np.array(dados).reshape(1,-1)
