@@ -63,4 +63,4 @@ def serialize_object(model):
     with open("trained_classifier.pkl", "wb") as file:
         pickle.dump(model, file)
 
-run(novos_dados=[0,0.0,0,35.0,0.0,0.0,0.0,0,0,0,0,0,0.0,1.0,0.0,0.0,0.0,1,3,6.0,11.0])
+#run(novos_dados=[0,0.0,0,35.0,0.0,0.0,0.0,0,0,0,0,0,0.0,1.0,0.0,0.0,0.0,1,3,6.0,11.0])
