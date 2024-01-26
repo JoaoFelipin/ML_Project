@@ -1,7 +1,6 @@
 import pickle
 import streamlit as st 
 import pandas as pd 
-import sklearn
 
 st.set_page_config(page_title='Deploy do modelo de diabetes')
 st.title('Diabetes Prediction')
